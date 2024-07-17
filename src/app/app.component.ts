@@ -96,8 +96,9 @@ export class AppComponent {
     if(this.city.length < 3){
       this.error = "Please enter city";
     } else{
-      this.getWeather();
       this.cityName = this.city;
+      this.getWeather();
+
     }
   }
 
