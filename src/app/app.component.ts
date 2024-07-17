@@ -18,6 +18,7 @@ export class AppComponent {
   cityName: string | undefined;
   error: string | undefined;
   loading = false;
+  history: any[] = [];
   constructor(private weatherService: WeatherServiceService, private geocodingService: GeocodingService) {
    // this.getWeather();
     this.getCurrentLocation();
@@ -30,6 +31,7 @@ export class AppComponent {
         next: result =>{
          console.log(result);
          this.weather = result;
+         this.history.push(this.weather);
          this.loading = false;
 
        },

@@ -8,6 +8,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {  HttpClientModule } from '@angular/common/http';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { TableModule } from 'primeng/table';
 @NgModule({
   declarations: [
     AppComponent
@@ -18,7 +19,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     InputTextModule,
     FormsModule, ReactiveFormsModule,HttpClientModule,
     BrowserAnimationsModule,
-
+    TableModule,
     AppRoutingModule
   ],
   providers: [ {provide: LocationStrategy, useClass: HashLocationStrategy},],
