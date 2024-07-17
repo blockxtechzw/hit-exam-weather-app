@@ -2,18 +2,53 @@
 <h3 style="text-align: center;"><i class="pi pi-user" style="font-size: 2.5rem"></i>{{cityName}}</h3> -->
 <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
   <div class="shadow-2 border-round surface-card px-4 md:px-6 py-6">
-
+   <div class="grid">
+    <div class="col-12 md:col-6">
+      <div class="border-left-2 border-pink-500">
+        <span class="bg-white text-pink-500 font-bold text-2xl inline-block px-3">WEATHER APPLICATION</span>
+    </div>
+    <div class="mt-6 mb-5 font-bold text-6xl text-900">{{cityName}}</div>
+    </div>
+   </div>
+   <div class="grid formgrid p-fluid">
+    <div class="col-12">
+      <p-messages [(value)]="messages" [closable]="true"></p-messages>
+    </div>
+    <div class="field mb-4 col-12">
+        <label for="city" class="font-medium text-900">Enter City Name</label>
+        <input id="city" type="text" pInputText [(ngModel)]="city">
+    </div>
+    <div class="col-12">
+      <button pButton pRipple [loading]="loading" label="Get Weather Information" class="w-auto mt-3" (click)="getWeatherInfor()"></button>
+    </div>
+    </div>
     <div class="grid">
       <div class="col-12 md:col-6">
-        <div class="border-left-2 border-pink-500">
-          <span class="bg-white text-pink-500 font-bold text-2xl inline-block px-3">WEATHER APPLICATION</span>
-      </div>
-      <div class="mt-6 mb-5 font-bold text-6xl text-900">{{cityName}}</div>
+        <h4>WEATHER HISTORY</h4>
+        <p-table [value]="history" >
+          <ng-template pTemplate="header">
+              <tr>
+                <th>CITY</th>
+                  <th>TEMP</th>
+                  <th>HUMIDITY</th>
+                  <th>WIND SPEED</th>
+
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-weather>
+              <tr>
+                <td>{{ weather?.name}}</td>
+                  <td>{{ weather?.main?.temp}}</td>
+                  <td>{{ weather?.main?.humidity }}</td>
+                  <td>{{ weather?.wind?.speed }}</td>
+              </tr>
+          </ng-template>
+      </p-table>
       </div>
       <div class="col-12 md:col-6">
         <div class="text-center border-1 surface-border border-round p-4">
           <i class="pi pi-sun text-5xl text-blue-500"></i>
-          <div class="text-900 text-2xl font-700 my-3 font-bold">{{weather?.main?.temp}}</div>
+          <div class="text-900 text-2xl font-700 my-3 font-bold">{{weather?.main?.temp}} &deg;C</div>
           <span class="font-medium text-600">{{weather?.weather[0]?.description | uppercase}}</span>
         </div>
         <div class="text-center border-1 surface-border border-round p-4">
@@ -31,15 +66,7 @@
 
 
 
-      <div class="grid formgrid p-fluid">
-        <div class="field mb-4 col-12">
-            <label for="city" class="font-medium text-900">Enter City Name</label>
-            <input id="city" type="text" pInputText [(ngModel)]="city">
-        </div>
-        <div class="col-12">
-          <button pButton pRipple [loading]="loading" label="Get Weather Information" class="w-auto mt-3" (click)="getWeather()"></button>
-        </div>
-        </div>
+
   </div>
 </div>
 <router-outlet></router-outlet>
