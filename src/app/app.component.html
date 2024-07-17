@@ -11,6 +11,9 @@
     </div>
    </div>
    <div class="grid formgrid p-fluid">
+    <div class="col-12">
+      <p-messages [(value)]="messages" [closable]="true"></p-messages>
+    </div>
     <div class="field mb-4 col-12">
         <label for="city" class="font-medium text-900">Enter City Name</label>
         <input id="city" type="text" pInputText [(ngModel)]="city">

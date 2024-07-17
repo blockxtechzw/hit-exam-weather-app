@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WeatherServiceService } from './weather-service.service';
 import { GeocodingService } from './geocoding.service';
+import { Message, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +20,8 @@ export class AppComponent {
   error: string | undefined;
   loading = false;
   history: any[] = [];
-  constructor(private weatherService: WeatherServiceService, private geocodingService: GeocodingService) {
-   // this.getWeather();
+  messages: Message[]  = [];
+  constructor(private weatherService: WeatherServiceService, private geocodingService: GeocodingService, private messageService: MessageService,) {
     this.getCurrentLocation();
   }
 
@@ -32,11 +33,14 @@ export class AppComponent {
          console.log(result);
          this.weather = result;
          this.history.push(this.weather);
+         this.messageService.add({severity:'success', summary:'Notification', detail:'Weather report fetched successfully'});
          this.loading = false;
 
        },
        error: err =>{
         this.loading = false;
+       this.messageService.add({severity:'error', summary:'Notification', detail:'City not found'});
+
        },
        complete: () =>{
         this.loading = false;
@@ -63,6 +67,7 @@ export class AppComponent {
               break;
             case error.TIMEOUT:
               this.error = "The request to get user location timed out.";
+              this.messageService.add({severity:'error', summary:'Notification', detail:'The request to get user location timed out.'});
               break;
             // case error.UNKNOWN_ERROR:
             //   this.error = "An unknown error occurred.";
@@ -99,6 +104,7 @@ export class AppComponent {
       this.error = "Please enter city";
     } else{
       this.cityName = this.city;
+      this.messages  = [];
       this.getWeather();
 
     }
